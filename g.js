@@ -41,6 +41,12 @@ const knex = require('./db/client');
 
 function g() {
   // knex query here. remember to call .toString
+  return knex('users').select('user.user_name', 'listings.name')
+  .join('reviews', 'users.id', '=', 'reviews.user_id')
+  .join('listings', 'listings.id', '=', 'reviews.listing_id')
+  .where('id', '=', 10).toString()
 }
+
+// console.log(g())
 
 module.exports = g;
